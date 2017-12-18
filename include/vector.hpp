@@ -39,8 +39,8 @@ public:
 private:
 
   Ty* array_;
-  size_t size_array_;
-  size_t count_;
+  std::size_t size_array_;
+  std::size_t count_;
 
   void swap(vector & other);
 };
