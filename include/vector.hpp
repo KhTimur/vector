@@ -2,6 +2,7 @@
 #define VECTOR_HPP
 
 #include <utility>
+#imclude <limits>
 
 template <class Ty>
 class vector {
@@ -206,7 +207,7 @@ std::size_t vector<Ty>::capacity() const {
 template<class Ty>
 std::size_t vector<Ty>::max_size() const {
 
-	return numeric_limits<std::size_t>::max();
+	return std::numeric_limits<std::size_t>::max();
 }
 
 template<class Ty>
