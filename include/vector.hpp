@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <limits>
+#include <algorithm>
 
 template <class Ty>
 class vector {
@@ -65,7 +66,7 @@ vector<Ty>::vector(vector<Ty> const & other)
 	, count_{ other.count_ } {
 
 	array_ = new Ty[size_array_];
-	copy(other.array_, other.array_ + count_, array_);
+	std::copy(other.array_, other.array_ + count_, array_);
 }
 
 template<class Ty>
@@ -184,7 +185,7 @@ void vector<Ty>::push_back(Ty const & value) {
 		}
 		Ty* tmp = array_;
 		array_ = new Ty[newsize];
-		copy(tmp, tmp + count_, array_);
+		std::copy(tmp, tmp + count_, array_);
 		size_array_ = newsize;
 		delete[] tmp;
 	}
@@ -231,7 +232,7 @@ void vector<Ty>::reserve(std::size_t size) {
 			if(count_ > 0) {
 				Ty* tmp = array_;
 				array_ = new Ty[newsize];
-				copy(tmp, tmp + count_, array_);
+				std::copy(tmp, tmp + count_, array_);
 				delete[] tmp;
 			} else {
 				delete[] array_;
@@ -255,7 +256,7 @@ void vector<Ty>::resize(std::size_t count) {
 		if (newsize < count_) {
 			Ty* tmp = array_;
 			array_ = new Ty[newsize];
-			copy(tmp, tmp + newsize, array_);
+			std::copy(tmp, tmp + newsize, array_);
 			count_ = newsize;
 			size_array_ = newsize;
 			delete[] tmp;
@@ -275,7 +276,7 @@ void vector<Ty>::shrink_to_fit() {
 		if (newsize != start_size) {
 			Ty* tmp = array_;
 			array_ = new Ty[newsize];
-			copy(tmp, tmp + count_, array_);
+			std::copy(tmp, tmp + count_, array_);
 			size_array_ = newsize;
 			delete[] tmp;
 		}
@@ -345,7 +346,7 @@ vector<Ty>::emplace_back(Args && args) {
 		}
 		Ty* tmp = array_;
 		array_ = new Ty[newsize];
-		copy(tmp, tmp + count_, array_);
+		std::copy(tmp, tmp + count_, array_);
 		size_array_ = newsize;
 		delete[] tmp;
 	}
